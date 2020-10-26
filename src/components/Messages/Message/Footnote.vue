@@ -4,7 +4,7 @@
       v-if="!hideReplies && message.replies"
       class="info"
       :class="{unread: unread.count}"
-      @click="$emit('open-thread-panel', { message })"
+      @click="$emit('openThreadPanel', { message })"
     >
       {{ $t('message.replies', { postProcess: 'interval', count: message.replies }) }}
       <span v-if="unread.count > 0 && unread.count < message.replies">({{ $t('message.newReplies', { postProcess: 'interval', count: unread.count }) }})</span>

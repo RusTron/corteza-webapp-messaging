@@ -19,13 +19,13 @@
       'type-channel-event': message.type === 'channelEvent',
       'last' : isLast && !isFirst,
     }"
-    @click.alt.exact.prevent="$emit('mark-as-unread', { message })"
+    @click.alt.exact.prevent="$emit('markAsUnread', { message })"
     @click.meta.exact.prevent="onOpenThread"
   >
     <div
       v-if="isLastRead && !isLast"
       class="label"
-      @click="$emit('mark-as-unread', { message })"
+      @click="$emit('markAsUnread', { message })"
     >
       {{ $t('message.newMessages') }}
     </div>
@@ -96,7 +96,7 @@
         :message="message"
         v-bind="$props"
         v-on="$listeners"
-        @cancel="$emit('cancel-editing')"
+        @cancel="$emit('cancelEditing')"
       />
 
       <contents
