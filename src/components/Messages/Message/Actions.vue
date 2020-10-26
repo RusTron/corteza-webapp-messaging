@@ -11,19 +11,19 @@
         v-if="message.canReply && !hideActionOpenThread"
         class="action icon-message-circle-left-speak"
         :title="$t('message.replyInThread')"
-        @click="$emit('openThreadPanel', { message })"
+        @click="$emit('open-thread-panel', { message })"
       />
       <i
         v-if="!hideActionGoToMessage"
         class="action icon-circle-right"
         :title="$t('message.goto')"
-        @click="$emit('goToMessage', { message })"
+        @click="$emit('go-to-message', { message })"
       />
       <i
         v-if="!hideMarkAsUnread"
         class="action icon-checkmark"
         :title="$t('message.markAsUnread')"
-        @click="$emit('markAsUnread', { message })"
+        @click="$emit('mark-as-unread', { message })"
       />
       <font-awesome-icon
         v-if="!hidePinning && !readOnly"
@@ -31,7 +31,7 @@
         icon="thumbtack"
         :class="{pinned:message.isPinned}"
         :title="$t('message.pin')"
-        @click="$emit('pinMessage', { message })"
+        @click="$emit('pin-message', { message })"
       />
       <font-awesome-icon
         v-if="!hideBookmarking"
@@ -39,41 +39,20 @@
         :icon="['far', 'bookmark']"
         :class="{bookmarked:message.isBookmarked}"
         :title="$t('message.bookmark')"
-        @click="$emit('bookmarkMessage', { message })"
+        @click="$emit('bookmark-message', { message })"
       />
       <i
-        v-if="!isContextMenuOpen && isContextMenuEnabled"
-        class="action icon-plus"
-        @click="onContextMenuOpen()"
+        v-if="message.canEdit"
+        class="action icon-edit"
+        :title="$t('message.edit')"
+        @click="$emit('edit-message', { message })"
       />
       <i
-        v-else-if="isContextMenuEnabled"
-        class="action icon-x"
-        @click="isContextMenuOpen=false"
+        v-if="message.canDelete"
+        class="action icon-trash"
+        :title="$t('message.delete')"
+        @click="$emit('delete-message', { message })"
       />
-    </div>
-    <div
-      v-if="isContextMenuOpen && isContextMenuEnabled"
-      class="context-menu"
-    >
-      <ul class="context-menu-list">
-        <li
-          v-if="message.canEdit"
-          class="extra-action"
-          @click="$emit('editMessage', { message });isContextMenuOpen=false"
-        >
-          <i class="icon icon-edit" />
-          <span>{{ $t('message.edit') }}</span>
-        </li>
-        <li
-          v-if="message.canDelete"
-          class="extra-action"
-          @click="$emit('deleteMessage', { message });isContextMenuOpen=false"
-        >
-          <i class="icon icon-trash" />
-          <span>{{ $t('message.delete') }}</span>
-        </li>
-      </ul>
     </div>
   </div>
 </template>

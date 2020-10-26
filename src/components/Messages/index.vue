@@ -19,7 +19,7 @@
       :hide-mark-as-unread="hideMarkAsUnread || index === messages.length - 1 || index === 0"
       :is-last="index === messages.length - 1"
       v-on="$listeners"
-      @cancelEditing="$emit('cancelEditing')"
+      @cancelEditing="$emit('cancel-editing')"
     />
     <li ref="anchor" />
   </ul>

@@ -1,7 +1,7 @@
 <template>
   <base-panel
     v-on="$listeners"
-    @onclick="$emit('openDirectMessage', u.userID);"
+    @onclick="$emit('open-direct-message', u.userID);"
   >
     <template slot="header">
       {{ $t('panel.membersHeader') }}
