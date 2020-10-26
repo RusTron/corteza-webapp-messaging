@@ -42,17 +42,38 @@
         @click="$emit('bookmark-message', { message })"
       />
       <i
-        v-if="message.canEdit"
-        class="action icon-edit"
-        :title="$t('message.edit')"
-        @click="$emit('edit-message', { message })"
+        v-if="!isContextMenuOpen && isContextMenuEnabled"
+        class="action icon-plus"
+        @click="onContextMenuOpen()"
       />
       <i
-        v-if="message.canDelete"
-        class="action icon-trash"
-        :title="$t('message.delete')"
-        @click="$emit('delete-message', { message })"
+        v-else-if="isContextMenuEnabled"
+        class="action icon-x"
+        @click="isContextMenuOpen=false"
       />
+    </div>
+    <div
+      v-if="isContextMenuOpen && isContextMenuEnabled"
+      class="context-menu"
+    >
+      <ul class="context-menu-list">
+        <li
+          v-if="message.canEdit"
+          class="extra-action"
+          @click="$emit('edit-message', { message });isContextMenuOpen=false"
+        >
+          <i class="icon icon-edit" />
+          <span>{{ $t('message.edit') }}</span>
+        </li>
+        <li
+          v-if="message.canDelete"
+          class="extra-action"
+          @click="$emit('delete-message', { message });isContextMenuOpen=false"
+        >
+          <i class="icon icon-trash" />
+          <span>{{ $t('message.delete') }}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
