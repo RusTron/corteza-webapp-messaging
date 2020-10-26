@@ -42,38 +42,17 @@
         @click="$emit('bookmark-message', { message })"
       />
       <i
-        v-if="!isContextMenuOpen && isContextMenuEnabled"
-        class="action icon-plus"
-        @click="onContextMenuOpen()"
+        v-if="message.canEdit"
+        class="action icon-edit"
+        :title="$t('message.edit')"
+        @click="$emit('edit-message', { message })"
       />
       <i
-        v-else-if="isContextMenuEnabled"
-        class="action icon-x"
-        @click="isContextMenuOpen=false"
+        v-if="message.canDelete"
+        class="action icon-trash"
+        :title="$t('message.delete')"
+        @click="$emit('delete-message', { message })"
       />
-    </div>
-    <div
-      v-if="isContextMenuOpen && isContextMenuEnabled"
-      class="context-menu"
-    >
-      <ul class="context-menu-list">
-        <li
-          v-if="message.canEdit"
-          class="extra-action"
-          @click="$emit('edit-message', { message });isContextMenuOpen=false"
-        >
-          <i class="icon icon-edit" />
-          <span>{{ $t('message.edit') }}</span>
-        </li>
-        <li
-          v-if="message.canDelete"
-          class="extra-action"
-          @click="$emit('delete-message', { message });isContextMenuOpen=false"
-        >
-          <i class="icon icon-trash" />
-          <span>{{ $t('message.delete') }}</span>
-        </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -218,10 +197,7 @@ export default {
         background-color: $light;
         cursor: pointer;
       }
-
     }
-
   }
-
 }
 </style>
