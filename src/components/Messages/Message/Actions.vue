@@ -8,6 +8,12 @@
         @click.stop="onReaction"
       />
       <i
+        v-if="message.canReply && !hideActionOpenThread"
+        class="action icon-message-circle-left-speak"
+        :title="$t('message.replyInThread')"
+        @click="$emit('openThreadPanel', { message })"
+      />
+      <i
         v-if="!hideActionGoToMessage"
         class="action icon-circle-right"
         :title="$t('message.goto')"
