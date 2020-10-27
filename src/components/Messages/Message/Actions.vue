@@ -8,16 +8,16 @@
         @click.stop="onReaction"
       />
       <i
-        v-if="message.canReply && !hideActionOpenThread"
-        class="action icon-message-circle-left-speak"
-        :title="$t('message.replyInThread')"
-        @click="$emit('openThreadPanel', { message })"
-      />
-      <i
         v-if="!hideActionGoToMessage"
         class="action icon-circle-right"
         :title="$t('message.goto')"
         @click="$emit('goToMessage', { message })"
+      />
+      <i
+        v-if="!hideMarkAsUnread"
+        class="action icon-checkmark"
+        :title="$t('message.markAsUnread')"
+        @click="$emit('markAsUnread', { message })"
       />
       <font-awesome-icon
         v-if="!hidePinning && !readOnly"
